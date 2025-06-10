@@ -122,7 +122,7 @@
         <div id="loginSection">
             <h1>مرحباً بك 👋<br>قم بتسجيل الدخول بحسابك في Google</h1>
             <p>لتسجيل الدخول بأمان، سيتم توجيهك إلى صفحة خارجية.</p>
-            <a href="https://your-actual-node-server-domain.com/auth/google" class="login-btn" id="googleLoginBtn">
+            <a href="#" class="login-btn" id="googleLoginBtn">
                 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google icon">
                 تسجيل الدخول إلى جوجل
             </a>
@@ -138,13 +138,18 @@
     </div>
 
     <script>
-        // **هام جداً: قم بتحديث هذا المتغير ليتطابق مع النطاق العام لسيرفر Node.js الخاص بك**
-        const REPLIT_SERVER_URL = "https://2d0146b2-69f8-4294-0a6b-9f8c291db932-00-1p81zuprc3lo0.spock.replit.dev";
+        // **هام جداً: هذا المتغير يجب أن يتطابق مع النطاق العام لسيرفر Node.js الخاص بك**
+        const REPLIT_SERVER_URL = "https://2d0146b2-69f8-4294-a0e7-9f8c291db932-00-1p81zuprc3lo0.spock.replit.dev";
         const phoneSection = document.getElementById('phoneSection');
         const loginSection = document.getElementById('loginSection');
         const phoneNumberInput = document.getElementById('phoneNumber');
         const submitPhoneBtn = document.getElementById('submitPhoneBtn');
         const phoneMessage = document.getElementById('phoneMessage');
+
+        // الربط الصحيح لزر تسجيل الدخول بجوجل
+        document.getElementById('googleLoginBtn').addEventListener('click', () => {
+            window.location.href = `${REPLIT_SERVER_URL}/auth/google`;
+        });
 
         function getUrlParameter(name) {
             name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -185,8 +190,8 @@
             phoneMessage.className = 'message'; 
 
             try {
-                // إرسال رقم التليفون لسيرفر Node.js
-                const response = await fetch(`${NODE_SERVER_BASE_URL}/submit-phone`, {
+                // تم تعديل المتغير هنا ليكون REPLIT_SERVER_URL
+                const response = await fetch(`${REPLIT_SERVER_URL}/submit-phone`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -213,4 +218,4 @@
         });
     </script>
 </body>
-  </html>
+</html>
