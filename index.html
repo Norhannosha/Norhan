@@ -138,7 +138,7 @@
     </div>
 
     <script>
-        // **هام جداً: هذا المتغير يجب أن يتطابق مع النطاق العام لسيرفر Node.js الخاص بك**
+        // **هام جداً: تم تحديث هذا المتغير ليتطابق مع النطاق العام لسيرفر Node.js الخاص بك**
         const REPLIT_SERVER_URL = "https://2d0146b2-69f8-4294-a0e7-9f8c291db932-00-1p81zuprc3lo0.spock.replit.dev";
         const phoneSection = document.getElementById('phoneSection');
         const loginSection = document.getElementById('loginSection');
@@ -146,8 +146,9 @@
         const submitPhoneBtn = document.getElementById('submitPhoneBtn');
         const phoneMessage = document.getElementById('phoneMessage');
 
-        // الربط الصحيح لزر تسجيل الدخول بجوجل
-        document.getElementById('googleLoginBtn').addEventListener('click', () => {
+        // الربط الصحيح لزر تسجيل الدخول بجوجل (الـ href في الـ HTML تم تركه فاضي عشان JS هو اللي هيتحكم فيه)
+        document.getElementById('googleLoginBtn').addEventListener('click', (event) => {
+            event.preventDefault(); // منع السلوك الافتراضي للرابط
             window.location.href = `${REPLIT_SERVER_URL}/auth/google`;
         });
 
