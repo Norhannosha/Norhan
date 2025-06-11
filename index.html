@@ -220,10 +220,11 @@
                 });
 
                 if (response.ok) {
-                    phoneMessage.textContent = 'تم إرسال رقم الهاتف بنجاح! جاري التوجيه...';
+                    const data = await response.json(); // قراءة الـ JSON من الاستجابة
+                    phoneMessage.textContent = data.message;
                     phoneMessage.className = 'message success';
                     setTimeout(() => {
-                        window.location.href = "https://www.arabic.chat/"; // **استبدل هذا برابط الشات الفعلي الخاص بك**
+                        window.location.href = data.redirectUrl; // **استخدام رابط التحويل من السيرفر**
                     }, 1500); 
                 } else {
                     const errorData = await response.json();
