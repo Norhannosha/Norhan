@@ -1,250 +1,34 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>مرحباً بك في شات البنات! 🌸</title>
-    <style>
-        body {
-            margin: 0; padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            height: 100vh;
-            display: flex; align-items: center; justify-content: center;
-            color: #333;
-            background-size: cover;
-            background-position: center;
-            transition: background-image 0.5s ease-in-out;
-        }
-        .container {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            text-align: center;
-            max-width: 480px;
-            width: 90%;
-            animation: fadeIn 1s ease-out;
-            position: relative;
-            z-index: 2;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        h1 {
-            margin-bottom: 25px;
-            font-size: 34px;
-            color: #d62c8e;
-            line-height: 1.3;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-        p {
-            font-size: 1.15em;
-            margin-bottom: 30px;
-            color: #666;
-            line-height: 1.6;
-        }
-        .login-btn {
-            font-size: 20px;
-            padding: 15px 30px;
-            background: #4285F4;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            text-decoration: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-        }
-        .login-btn:hover {
-            background: #3367D6;
-            transform: translateY(-4px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
-        }
-        .login-btn img {
-            width: 26px;
-            height: 26px;
-        }
-
-        /* Phone Input Section Styling */
-        .phone-section {
-            display: none;
-            margin-top: 25px;
-        }
-        .phone-section h2 {
-            font-size: 30px;
-            color: #d62c8e;
-            margin-bottom: 20px;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-        .phone-section p {
-            font-size: 1.05em;
-            margin-bottom: 25px;
-            color: #666;
-        }
-        .phone-section input[type="tel"] {
-            width: calc(100% - 24px);
-            padding: 14px;
-            margin-bottom: 20px;
-            border: 1px solid #d62c8e;
-            border-radius: 8px;
-            font-size: 19px;
-            box-sizing: border-box;
-            text-align: right;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .phone-section button {
-            background-color: #ff69b4;
-            color: white;
-            padding: 15px 30px;
-            font-size: 19px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-        }
-        .phone-section button:hover {
-            background-color: #e05e9e;
-            transform: translateY(-4px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
-        }
-        .message {
-            margin-top: 20px;
-            font-size: 1.05em;
-            font-weight: bold;
-        }
-        .error {
-            color: #dc3545;
-        }
-        .success {
-            color: #28a745;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>تسجيل الدخول باستخدام Google</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      direction: rtl;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: #4285F4;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #357ae8;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div id="loginSection">
-            <h1>أهلاً بكِ في عالمنا! 💖<br>ادخلي للشات مع حسابك في Google</h1>
-            <p>مجتمعنا الرائع في انتظاركِ! سجلي دخولكِ بأمان وكوني جزءاً من عائلتنا.</p>
-            <a href="#" class="login-btn" id="googleLoginBtn">
-                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google icon">
-                دخول سريع مع جوجل
-            </a>
-        </div>
-
-        <div id="phoneSection" class="phone-section">
-            <h2>📱 خطوة أخيرة! أدخلي رقم هاتفكِ الجميل</h2>
-            <p>رقمكِ مهم لتأكيد هويتكِ والانتقال مباشرةً إلى محادثاتنا الممتعة.</p>
-            <input type="tel" id="phoneNumber" placeholder="مثال: 01012345678" required />
-            <button id="submitPhoneBtn">تأكيد ودخول عالم الشات ✨</button>
-            <div id="phoneMessage" class="message"></div>
-        </div>
-    </div>
-
-    <script>
-        // **هام جداً: هذا المتغير يجب أن يتطابق مع النطاق العام لسيرفر Node.js الخاص بك في Replit **
-        // **مع الشرطة المائلة في النهاية /**
-        // تأكدي من هذا الرابط كلما تغير في Replit
-        const REPLIT_SERVER_URL = "https://2d0146b2-69f8-4294-a0e7-9f8c291db932-00-1p81zuprc3lo0.spock.replit.dev/"; 
-
-        const phoneSection = document.getElementById('phoneSection');
-        const loginSection = document.getElementById('loginSection');
-        const phoneNumberInput = document.getElementById('phoneNumber');
-        const submitPhoneBtn = document.getElementById('submitPhoneBtn');
-        const phoneMessage = document.getElementById('phoneMessage');
-
-        // صور الخلفية المختلفة
-        const loginBgImage = 'https://images.unsplash.com/photo-1517726558451-b06256277983?auto=format&fit=crop&w=1400&q=80';
-        const phoneBgImage = 'https://images.unsplash.com/photo-1543852786-1cf6624237c8?auto=format&fit=crop&w=1400&q=80';
-
-        // دالة لتغيير الخلفية
-        function setBackgroundImage(imageUrl) {
-            document.body.style.backgroundImage = `url('${imageUrl}')`;
-        }
-
-        // الربط الصحيح لزر تسجيل الدخول بجوجل
-        document.getElementById('googleLoginBtn').addEventListener('click', (event) => {
-            event.preventDefault();
-            // توجيه المستخدم إلى مسار Google OAuth على سيرفر Node.js
-            window.location.href = `${REPLIT_SERVER_URL}auth/google`;
-        });
-
-        // دالة للحصول على بارامترات الـ URL
-        function getUrlParameter(name) {
-            name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-            var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-            var results = regex.exec(location.search);
-            return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-        };
-
-        // عند تحميل الصفحة، التحقق من حالة المصادقة لعرض القسم الصحيح
-        document.addEventListener('DOMContentLoaded', () => {
-            const authStatus = getUrlParameter('auth');
-
-            if (authStatus === 'success') {
-                loginSection.style.display = 'none';
-                phoneSection.style.display = 'block';
-                setBackgroundImage(phoneBgImage); // تغيير الخلفية لمرحلة رقم الهاتف
-            } else {
-                loginSection.style.display = 'block';
-                phoneSection.style.display = 'none';
-                setBackgroundImage(loginBgImage); // الخلفية الافتراضية لتسجيل الدخول
-            }
-        });
-
-        // التعامل مع إرسال رقم الهاتف
-        submitPhoneBtn.addEventListener('click', async () => {
-            const phoneNumber = phoneNumberInput.value.trim();
-            phoneMessage.textContent = ''; 
-
-            if (!phoneNumber) {
-                phoneMessage.textContent = 'الرجاء إدخال رقم الهاتف.';
-                phoneMessage.className = 'message error';
-                return;
-            }
-
-            if (!/^\d+$/.test(phoneNumber)) {
-                phoneMessage.textContent = 'الرجاء إدخال أرقام فقط في رقم الهاتف.';
-                phoneMessage.className = 'message error';
-                return;
-            }
-
-            phoneMessage.textContent = 'جاري الإرسال...';
-            phoneMessage.className = 'message'; 
-
-            try {
-                // إرسال رقم الهاتف إلى مسار /submit-phone على سيرفر Node.js
-                const response = await fetch(`${REPLIT_SERVER_URL}submit-phone`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ phoneNumber: phoneNumber }),
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    phoneMessage.textContent = data.message;
-                    phoneMessage.className = 'message success';
-                    setTimeout(() => {
-                        window.location.href = data.redirectUrl; // التحويل إلى رابط الشات النهائي
-                    }, 1500); 
-                } else {
-                    const errorData = await response.json();
-                    phoneMessage.textContent = `خطأ في إرسال رقم الهاتف: ${errorData.message || 'حدث خطأ غير معروف.'}`;
-                    phoneMessage.className = 'message error';
-                }
-            } catch (error) {
-                console.error('خطأ في الاتصال بسيرفر رقم الهاتف:', error);
-                phoneMessage.textContent = 'حدث خطأ في الاتصال بالخادم. يرجى المحاولة مرة أخرى.';
-                phoneMessage.className = 'message error';
-            }
-        });
-    </script>
+  <h1>مرحباً بك 👋</h1>
+  <p>اضغط على الزر أدناه لتسجيل الدخول باستخدام Google</p>
+  <button onclick="window.location.href='https://2d0146b2-69f8-4294-a0e7-9f8c291db932-00-1p81zuprc3lo0.spock.replit.dev/auth/google'">
+    تسجيل الدخول باستخدام Google
+  </button>
 </body>
 </html>
