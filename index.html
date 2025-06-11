@@ -2,47 +2,127 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>تسجيل الدخول والشات</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تسجيل الدخول | Norhan</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:'Cairo',sans-serif}
+:root{
+  --primary:#ff595a;
+  --secondary:#1982c4;
+  --bg-start:#6a4c93;
+  --bg-end:#1982c4;
+}
+*{box-sizing:border-box;font-family:'Cairo',sans-serif;margin:0;padding:0}
+body,html{height:100%;overflow-x:hidden}
 body{
-display:flex;justify-content:center;align-items:center;height:100vh;color:#fff;
-background:#000 url("https://source.unsplash.com/1600x900/?abstract,technology") no-repeat center/cover;
-text-align:center;transition:background-image .6s
+  background:linear-gradient(130deg,var(--bg-start),var(--bg-end));
+  background-size:400% 400%;
+  animation:bgAnim 15s ease infinite;
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  color:#fff;
+}
+
+@keyframes bgAnim{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}
+
+.card{
+  backdrop-filter:blur(15px);
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.2);
+  border-radius:25px;
+  padding:40px 30px;
+  max-width:400px;
+  width:100%;
+  text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+button{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:30px;
+  font-size:1rem;
+  font-weight:700;
+  cursor:pointer;
+  transition:.3s;
+}
+
+button:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.2)}
+
+#google-login-btn{background:#fff;color:var(--secondary);}
+#phone-submit-btn{background:var(--primary);color:#fff;margin-top:15px}
+
+input[type="tel"]{
+  width:100%;
+  padding:15px;
+  border-radius:20px;
+  border:none;
+  margin-top:15px;
+  font-size:1rem;
+  direction:ltr;
 }
 .hidden{display:none}
-.container{
-background:rgba(0,0,0,.55);backdrop-filter:blur(8px);
-padding:40px 30px;border-radius:10px;width:90%;max-width:420px
-}
-button,input{
-width:100%;padding:14px 18px;margin:10px 0;border:none;border-radius:6px;font-size:1.1em
-}
-button{cursor:pointer}
-#googleBtn{background:#4285F4;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px}
-#googleBtn img{height:22px}
-#sendPhone{background:#28a745;color:#fff}
+footer{position:fixed;bottom:10px;width:100%;text-align:center;font-size:.8rem;color:rgba(255,255,255,.7)}
 </style>
 </head>
 <body>
-<!-- صفحة تسجيل الدخول -->
-<div class="container" id="loginSection">
-<h1>سجِّل دخولك بحساب جوجل</h1>
-<button id="googleBtn">
-  <img src="https://developers.google.com/identity/images/g-logo.png" alt="">
-  تسجيل الدخول بجوجل
-</button>
-</div>
+  <div class="card" id="login-view">
+    <h1 style="margin-bottom:25px">مرحبا بك 👋</h1>
+    <p style="margin-bottom:25px">قم بتسجيل الدخول بحساب جوجل لمتابعة استخدام الخدمة</p>
+    <button id="google-login-btn">تسجيل الدخول بحساب Google</button>
+  </div>
 
-<!-- صفحة إدخال رقم الهاتف -->
-<div class="container hidden" id="phoneSection">
-<h2>أدخل رقم هاتفك</h2>
-<input type="tel" id="phoneInput" placeholder="+201234567890" required>
-<button id="sendPhone">إرسال</button>
-</div>
+  <div class="card hidden" id="phone-view">
+    <h2 style="margin-bottom:20px">أدخل رقم هاتفك</h2>
+    <form id="phone-form">
+      <input type="tel" id="phone-input" required placeholder="+201XXXXXXXXX" pattern="\+?[0-9]{6,15}">
+      <button type="submit" id="phone-submit-btn">إرسال</button>
+    </form>
+  </div>
 
-<script src="app.js" defer></script>
+<footer>&copy; 2025 Norhan</footer>
+
+<script>
+const NODE_SERVER_PUBLIC_DOMAIN = 'https://2d0146b2-69f8-4294-a0e7-9f8c291db932-00-1p81zuprc3lo0.spock.replit.dev';
+const LOGIN_VIEW    = document.getElementById('login-view');
+const PHONE_VIEW    = document.getElementById('phone-view');
+const loginBtn      = document.getElementById('google-login-btn');
+const phoneForm     = document.getElementById('phone-form');
+const phoneInput    = document.getElementById('phone-input');
+
+window.addEventListener('DOMContentLoaded',()=>{
+  const urlParams = new URLSearchParams(window.location.search);
+  if(urlParams.get('auth')==='success'){
+    LOGIN_VIEW.classList.add('hidden');
+    PHONE_VIEW.classList.remove('hidden');
+  }
+});
+
+loginBtn?.addEventListener('click',()=>{
+  window.location.href = NODE_SERVER_PUBLIC_DOMAIN + '/auth/google';
+});
+
+phoneForm?.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const phoneNumber = phoneInput.value.trim();
+  if(!phoneNumber) return alert('يرجى إدخال رقم هاتف صالح');
+  try{
+    const res = await fetch(NODE_SERVER_PUBLIC_DOMAIN + '/submit-phone',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({phoneNumber})
+    });
+    const data = await res.json();
+    if(res.ok){
+      window.location.href = data.redirectUrl || 'https://www.arabchat.com/';
+    }else{
+      alert(data.message || 'حدث خطأ أثناء إرسال الرقم');
+    }
+  }catch(err){
+    console.error(err);
+    alert('تعذر الاتصال بالخادم، حاول مرة أخرى.');
+  }
+});
+</script>
 </body>
 </html>
