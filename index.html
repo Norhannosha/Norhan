@@ -72,8 +72,14 @@ phoneForm.addEventListener("submit",async e=>{
   try{
     const r=await fetch(NODE_SERVER_PUBLIC_DOMAIN+"/submit-phone",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({phoneNumber})});
     const d=await r.json();
-    if(r.ok){window.location.href=d.redirectUrl||"https://www.arabchat.com/"}else{alert(d.message||"حدث خطأ أثناء إرسال الرقم")}
-  }catch{alert("تعذر الاتصال بالخادم، حاول مرة أخرى.")}
+    if(r.ok){
+      window.location.href=d.redirectUrl||"https://www.arbada.com/"
+    }else{
+      alert(d.message||"حدث خطأ أثناء إرسال الرقم")
+    }
+  }catch{
+    alert("تعذر الاتصال بالخادم، حاول مرة أخرى.")
+  }
 });
 </script>
 </body>
