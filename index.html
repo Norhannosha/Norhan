@@ -1,100 +1,48 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>تسجيل الدخول والشات</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Cairo',sans-serif}
 body{
-margin:0;
-font-family:Tahoma,Arial,sans-serif;
-color:#fff;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-background:#000;
-background-size:cover;
-transition:background-image .6s ease-in-out;
-text-align:center
+display:flex;justify-content:center;align-items:center;height:100vh;color:#fff;
+background:#000 url("https://source.unsplash.com/1600x900/?abstract,technology") no-repeat center/cover;
+text-align:center;transition:background-image .6s
 }
 .hidden{display:none}
 .container{
-background:rgba(0,0,0,.55);
-padding:40px 30px;
-border-radius:10px;
-backdrop-filter:blur(8px);
-width:90%;
-max-width:420px
+background:rgba(0,0,0,.55);backdrop-filter:blur(8px);
+padding:40px 30px;border-radius:10px;width:90%;max-width:420px
 }
 button,input{
-font-size:1.1em;
-padding:14px 18px;
-border:none;
-border-radius:6px;
-margin:10px 0;
-width:100%
+width:100%;padding:14px 18px;margin:10px 0;border:none;border-radius:6px;font-size:1.1em
 }
 button{cursor:pointer}
-#googleBtn{background:#4285F4;color:#fff;display:flex;justify-content:center;align-items:center;gap:8px}
+#googleBtn{background:#4285F4;color:#fff;display:flex;align-items:center;justify-content:center;gap:8px}
 #googleBtn img{height:22px}
 #sendPhone{background:#28a745;color:#fff}
 </style>
 </head>
 <body>
+<!-- صفحة تسجيل الدخول -->
 <div class="container" id="loginSection">
-<h1>سجّل دخولك بحساب جوجل</h1>
-<button id="googleBtn"><img src="https://developers.google.com/identity/images/g-logo.png" alt>تسجيل الدخول بجوجل</button>
+<h1>سجِّل دخولك بحساب جوجل</h1>
+<button id="googleBtn">
+  <img src="https://developers.google.com/identity/images/g-logo.png" alt="">
+  تسجيل الدخول بجوجل
+</button>
 </div>
 
+<!-- صفحة إدخال رقم الهاتف -->
 <div class="container hidden" id="phoneSection">
 <h2>أدخل رقم هاتفك</h2>
 <input type="tel" id="phoneInput" placeholder="+201234567890" required>
 <button id="sendPhone">إرسال</button>
 </div>
 
-<script>
-const GITHUB_PAGES_URL = "https://norhannosha.github.io/Norhan";
-const NODE_SERVER = "https://2d0146b2-69f8-4294-a0e7-9f8c291db932-00-1p81zuprc3lo0.spock.replit.dev";
-
-const loginSection = document.getElementById('loginSection');
-const phoneSection = document.getElementById('phoneSection');
-const backgrounds = {
-  login: "url('https://source.unsplash.com/1600x900/?abstract,technology')",
-  phone: "url('https://source.unsplash.com/1600x900/?chat,abstract')"
-};
-
-function showLogin(){
-  document.body.style.backgroundImage = backgrounds.login;
-  loginSection.classList.remove('hidden');
-  phoneSection.classList.add('hidden');
-}
-
-function showPhone(){
-  document.body.style.backgroundImage = backgrounds.phone;
-  loginSection.classList.add('hidden');
-  phoneSection.classList.remove('hidden');
-}
-
-if (new URLSearchParams(window.location.search).get('auth') === 'success'){
-  showPhone();
-}else{
-  showLogin();
-}
-
-document.getElementById('googleBtn').onclick = ()=>{window.location.href = NODE_SERVER + "/auth/google";};
-
-document.getElementById('sendPhone').onclick = async ()=>{
-  const phone = document.getElementById('phoneInput').value.trim();
-  if(!phone){alert("يرجى إدخال رقم الهاتف");return;}
-  try{
-    const res = await fetch(NODE_SERVER + "/submit-phone",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({phoneNumber:phone})});
-    const data = await res.json();
-    if(res.ok && data.redirectUrl){window.location.href = data.redirectUrl;}
-    else{alert(data.message || "حدث خطأ");}
-  }catch(e){alert("خطأ بالشبكة");}
-};
-</script>
+<script src="app.js" defer></script>
 </body>
 </html>
