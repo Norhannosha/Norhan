@@ -7,9 +7,7 @@
 <title>تسجيل الدخول | Norhan</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --primary:#ff595a;--secondary:#1982c4;--bg-start:#6a4c93;--bg-end:#1982c4
-}
+:root{--primary:#ff595a;--secondary:#1982c4;--bg-start:#6a4c93;--bg-end:#1982c4}
 *{box-sizing:border-box;font-family:'Cairo',sans-serif;margin:0;padding:0}
 html,body{height:100%;overflow-x:hidden}
 body{
@@ -31,10 +29,7 @@ button{
 button:hover{transform:translateY(-3px);box-shadow:0 8px 20px rgba(0,0,0,.2)}
 #google-login-btn{background:#fff;color:var(--secondary)}
 #phone-submit-btn{background:var(--primary);color:#fff;margin-top:15px}
-input[type=tel]{
-  width:100%;padding:15px;border-radius:20px;border:none;
-  margin-top:15px;font-size:1rem;direction:ltr
-}
+input[type=tel]{width:100%;padding:15px;border-radius:20px;border:none;margin-top:15px;font-size:1rem;direction:ltr}
 .hidden{display:none}
 footer{position:fixed;bottom:10px;width:100%;text-align:center;font-size:.8rem;color:rgba(255,255,255,.7)}
 </style>
@@ -45,6 +40,7 @@ footer{position:fixed;bottom:10px;width:100%;text-align:center;font-size:.8rem;c
   <p style="margin-bottom:25px">قم بتسجيل الدخول بحساب جوجل لمتابعة استخدام الخدمة</p>
   <button id="google-login-btn">تسجيل الدخول بحساب Google</button>
 </div>
+
 <div class="card hidden" id="phone-view">
   <h2 style="margin-bottom:20px">أدخل رقم هاتفك</h2>
   <form id="phone-form">
@@ -52,33 +48,42 @@ footer{position:fixed;bottom:10px;width:100%;text-align:center;font-size:.8rem;c
     <button type="submit" id="phone-submit-btn">إرسال</button>
   </form>
 </div>
+
 <footer>&copy; 2025 Norhan</footer>
+
 <script>
 const NODE_SERVER_PUBLIC_DOMAIN="https://2d0146b2-69f8-4294-a0e7-9f8c291db932-00-1p81zuprc3lo0.spock.replit.dev";
-const LOGIN_VIEW=document.getElementById("login-view");
-const PHONE_VIEW=document.getElementById("phone-view");
+const loginView=document.getElementById("login-view");
+const phoneView=document.getElementById("phone-view");
 const loginBtn=document.getElementById("google-login-btn");
 const phoneForm=document.getElementById("phone-form");
 const phoneInput=document.getElementById("phone-input");
+
 window.addEventListener("DOMContentLoaded",()=>{
   const p=new URLSearchParams(window.location.search);
-  if(p.get("auth")==="success"){LOGIN_VIEW.classList.add("hidden");PHONE_VIEW.classList.remove("hidden")}
+  if(p.get("auth")==="success"){loginView.classList.add("hidden");phoneView.classList.remove("hidden")}
 });
-loginBtn.addEventListener("click",()=>{window.location.href=NODE_SERVER_PUBLIC_DOMAIN+"/auth/google"});
+
+loginBtn.addEventListener("click",()=>window.location.href=NODE_SERVER_PUBLIC_DOMAIN+"/auth/google");
+
 phoneForm.addEventListener("submit",async e=>{
   e.preventDefault();
-  const phoneNumber=phoneInput.value.trim();
-  if(!phoneNumber)return alert("يرجى إدخال رقم هاتف صالح");
+  const phone=phoneInput.value.trim();
+  if(!phone)return alert("يرجى إدخال رقم هاتف صالح");
   try{
-    const r=await fetch(NODE_SERVER_PUBLIC_DOMAIN+"/submit-phone",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({phoneNumber})});
+    const r=await fetch(NODE_SERVER_PUBLIC_DOMAIN+"/submit-phone",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({phoneNumber:phone})
+    });
     const d=await r.json();
     if(r.ok){
-      window.location.href=d.redirectUrl||"https://www.arbada.com/"
+      window.location.href=d.redirectUrl||"https://www.arabic.chat/";
     }else{
-      alert(d.message||"حدث خطأ أثناء إرسال الرقم")
+      alert(d.message||"حدث خطأ أثناء إرسال الرقم");
     }
   }catch{
-    alert("تعذر الاتصال بالخادم، حاول مرة أخرى.")
+    alert("تعذر الاتصال بالخادم، حاول مرة أخرى.");
   }
 });
 </script>
